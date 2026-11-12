@@ -169,17 +169,38 @@ def wrap_lines(text, max_chars=38):
     return lines
 
 
+def _pieces(text, max_chars):
+    """Split text at sentence / clause ends so that each piece fits in two lines."""
+    import re as _re
+    parts = [x.strip() for x in _re.split(r"(?<=[.!?;:…])\s+|(?<=[,—–])\s+", text) if x.strip()]
+    out, cur = [], ""
+    for x in parts:
+        cand = (cur + " " + x).strip()
+        if cur and len(wrap_lines(cand, max_chars)) > 2:
+            out.append(cur)
+            cur = x
+        else:
+            cur = cand
+    if cur:
+        out.append(cur)
+    final = []
+    for x in out:  # a single clause still longer than two lines: split by lines
+        ls = wrap_lines(x, max_chars)
+        final += [" ".join(ls[i:i + 2]) for i in range(0, len(ls), 2)]
+    return final or [""]
+
+
 def make_cues(chunks, max_chars=38):
-    """chunks: [(start, end, text)] -> cues of at most 2 lines, time split by length."""
+    """chunks: [(start, end, text)] -> cues of at most 2 lines, split at sentence/clause ends,
+    time shared by length."""
     cues = []
     for s, e, text in chunks:
-        lines = wrap_lines(text, max_chars)
-        groups = [lines[i:i + 2] for i in range(0, len(lines), 2)] or [[""]]
-        total = sum(len(" ".join(g)) for g in groups) or 1
+        pieces = _pieces(text, max_chars)
+        total = sum(len(x) for x in pieces) or 1
         t = s
-        for g in groups:
-            dur = (e - s) * len(" ".join(g)) / total
-            cues.append((t, t + dur, "\\N".join(_esc(x) for x in g)))
+        for x in pieces:
+            dur = (e - s) * len(x) / total
+            cues.append((t, t + dur, "\\N".join(_esc(l) for l in wrap_lines(x, max_chars))))
             t += dur
     return cues
 

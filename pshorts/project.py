@@ -230,6 +230,7 @@ def analyse(pid, settings):
         frs = llm.select_fragments(settings["deepseek_key"], segs, count=p.get("count"),
                                    min_s=lo, max_s=hi, glossary=glossary_text())
         frags = []
+        frs = [f for f in frs if float(f.get("end", 0)) - float(f.get("start", 0)) >= lo * 0.8]
         for i, f in enumerate(sorted(frs, key=lambda x: float(x.get("start", 0)))):
             frags.append({
                 "id": i + 1, "start": float(f["start"]), "end": float(f["end"]),
@@ -270,9 +271,9 @@ def make_texts(pid, settings):
         for n, f in enumerate(frs):
             update(pid, progress={"step": "subs", "frac": n / max(len(frs), 1)})
             core = [w for w in words if f["start"] - 0.2 <= w["s"] < f["end"]]
-            tail = [w for w in words if f["end"] <= w["s"] < min(f["end"] + 40, f["start"] + 175)]
+            tail = [w for w in words if f["end"] <= w["s"] < min(f["end"] + 60, f["start"] + 178)]
             before = " ".join(w["w"] for w in words if f["start"] - 60 <= w["s"] < f["start"] - 0.2)
-            after = " ".join(w["w"] for w in words if f["end"] + 40 <= w["s"] < f["end"] + 80)
+            after = " ".join(w["w"] for w in words if f["end"] + 60 <= w["s"] < f["end"] + 100)
             ws = core + tail
             subs = llm.make_subtitles(settings["deepseek_key"], ws, langs,
                                       src_lang_name=LANG_NAMES.get(p["lang"], "Telugu"),
