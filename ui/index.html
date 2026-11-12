@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pravachanam Shorts</title>
+<link rel="icon" href="/ui/icon.png">
+<style>
+@font-face{font-family:Fraunces;src:url(/ui/fonts/PSFraunces.ttf)}
+@font-face{font-family:Corm;src:url(/ui/fonts/PSCormorant.ttf)}
+@font-face{font-family:Telugu;src:url(/ui/fonts/PSTelugu.ttf)}
+@font-face{font-family:Deva;src:url(/ui/fonts/PSDevanagari.ttf)}
+:root{--bg:#F9F6F0;--ink:#281E15;--acc:#B64D20;--brick:#8A3A12;--line:#D7CDC1;--mut:#514134;--gold:#D9B77A;--dark:#3A2416;--ok:#2F6B3A;--yel:#FBE7A1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",Inter,Telugu,Deva,system-ui,sans-serif}
+h1{font:600 34px/1.2 Fraunces,Telugu,serif;margin:0 0 8px}
+h2{font:600 22px/1.3 Fraunces,Telugu,serif;margin:0}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--ink)}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;background:var(--dark);color:#F6EBDD;border-bottom:3px double var(--gold)}
+.brandbtn{display:flex;align-items:center;gap:14px;background:none;border:0;color:inherit;padding:0}
+.brandbtn img{width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 3px rgba(217,183,122,.35)}
+.bt1{font:600 24px Fraunces,serif;display:block;text-align:left}.bt2{font:15px Deva,serif;color:var(--gold);display:block;text-align:left}
+.nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.nav .n{background:none;border:0;border-bottom:2px solid transparent;color:#E6D6C2;padding:8px 14px;min-height:40px}
+.nav .n.on{background:rgba(217,183,122,.2);color:#FFF7EC;border-bottom-color:var(--gold);font-weight:600;border-radius:6px 6px 0 0}
+.lang{background:transparent;color:#F6EBDD;border:1px solid rgba(217,183,122,.55);border-radius:999px;padding:6px 14px;min-height:36px}
+.lang.on{background:var(--gold);color:var(--dark);font-weight:600}
+.steps{display:flex;flex-wrap:wrap;gap:8px;padding:14px 32px;border-bottom:1px solid var(--line)}
+.step{border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:5px 13px;font-size:14px}
+.step.past{background:#EFE8DD;color:var(--ink);border-color:#EFE8DD}.step.on{background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+main{max-width:1120px;margin:0 auto;padding:32px}
+.card{background:#fff;border:1px solid var(--line);border-top:2px solid var(--gold);border-radius:12px;box-shadow:0 1px 2px rgba(58,36,22,.05),0 8px 22px rgba(58,36,22,.06);padding:20px 24px}
+.stack{display:flex;flex-direction:column;gap:16px}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.between{justify-content:space-between}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:8px;padding:12px 26px;min-height:48px;font-weight:600;font-size:17px}
+.btn:disabled{background:#EFE8DD;color:#6B5B4D;cursor:not-allowed}
+.btn2{background:#fff;color:var(--acc);border:1px solid var(--acc);border-radius:8px;padding:9px 18px;min-height:44px;font-weight:500}
+.btn3{background:none;color:var(--mut);border:1px solid var(--line);border-radius:8px;padding:9px 18px;min-height:44px}
+.okb{background:var(--ok);color:#fff;border:0;border-radius:8px;padding:10px 20px;min-height:44px;font-weight:600}
+.mini{min-width:44px;min-height:36px;border:1px solid var(--line);background:#fff;border-radius:6px}
+.mut{color:var(--mut)}.small{font-size:14px}
+label.f{display:flex;flex-direction:column;gap:6px;font-weight:500}
+.f input[type=text],.f input[type=email],.f input[type=password],.f select{min-height:44px;border:1px solid var(--line);border-radius:8px;padding:0 12px;background:#fff;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.chk{display:flex;align-items:center;gap:10px;min-height:32px}.chk input{width:20px;height:20px;accent-color:var(--acc)}
+.drop{border:2px dashed var(--acc);border-radius:16px;background:#fff;padding:40px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.drop.hover{background:#FBF1E4}
+.note{background:#FBF1E4;border:1px solid var(--gold);border-radius:12px;padding:14px 18px}
+.yel{background:var(--yel);border-radius:10px;padding:12px 16px}
+.bar{height:10px;background:#EFE8DD;border-radius:999px;overflow:hidden}.bar>div{height:100%;background:var(--acc);transition:width .5s}
+.badge{border-radius:999px;padding:4px 12px;font-size:14px;white-space:nowrap}
+.b-ok{background:#E3EFE3;color:var(--ok);font-weight:600}.b-wait{background:var(--yel)}.b-no{background:#EFE8DD;color:var(--mut)}.b-err{background:#F6DCD3;color:#7A2A10}
+.frag{display:flex;flex-wrap:wrap;gap:20px}.frag video{width:240px;height:180px;background:#3A2E24;border-radius:8px;flex:none}
+.frag.ok{border:2px solid var(--ok)}.frag.no{opacity:.55}
+.hero{background:#FFFDF8;border:1px solid var(--gold);border-radius:16px;padding:32px;text-align:center;margin-bottom:32px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(58,36,22,.08)}
+.hero img{width:160px;height:160px;border-radius:50%;box-shadow:0 6px 20px rgba(58,36,22,.14)}
+.subt{width:100%;border-collapse:collapse}.subt td{border-top:1px solid #EFE8DD;padding:8px;vertical-align:top}
+.subt td.t{font-size:13px;color:var(--mut);white-space:nowrap;width:70px}.subt td.o{font-family:Telugu,Deva,sans-serif;width:30%}
+.subt textarea{width:100%;border:1px solid var(--line);border-radius:6px;padding:6px 8px;font:17px/1.35 Corm,Georgia,serif;resize:vertical;min-height:52px;background:#fff}
+.subt tr.flag td{background:#FFF6D6}.flagr{font-size:13px;color:#7A5A00}
+.chip{background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 12px;min-height:38px}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc);font-style:italic;font-weight:600}
+.tpl{width:150px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.tpl.on{border:2px solid var(--acc);box-shadow:0 0 0 4px rgba(182,77,32,.12)}
+.mini9{width:130px;height:231px;border-radius:6px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.mini9 .v{width:104px;height:104px;background:#3A2E24}
+.tadd{width:150px;min-height:290px;border:2px dashed var(--gold);border-radius:12px;background:#FFFDF8;color:var(--brick);font-weight:600}
+footer{border-top:1px solid var(--line);margin-top:24px;padding:24px;text-align:center;color:var(--mut);font-size:14px}
+.err{background:#F6DCD3;border-radius:10px;padding:12px 16px;color:#7A2A10}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="brandbtn" onclick="go('home')"><img src="/ui/icon.png" alt="Svarvāṇī Prakāśaḥ"><span><span class="bt1">Pravachanam Shorts</span><span class="bt2">स्वर्वाणीप्रकाशः</span></span></button>
+  <nav class="nav" id="nav"></nav>
+</header>
+<div class="steps hidden" id="steps"></div>
+<main id="main"></main>
+<footer><span style="font-family:Deva;color:var(--brick)">स्वर्वाणीप्रकाशः</span> · Dr. Usha Rani Sanka · <span id="ver"></span></footer>
+
+<script>
+const T={
+en:{home:'Projects',settings:'Settings',newVideo:'New video',projects:'Your projects',tagline:'From a pravachanam to finished Shorts — in a few clicks.',noProjects:'No projects yet. Add your first video.',open:'Open',del:'Delete',
+st_processing:'Working…',st_fragments:'Waiting for your approval',st_text:'Check the text',st_titles:'Titles and design',st_rendering:'Making Shorts…',st_done:'Ready',st_error:'Stopped',
+upTitle:'Add a video',drop:'Drag a video here',or:'or',choose:'Choose file…',chosen:'Chosen:',srcLang:'Language of the talk',auto:'Detect automatically',english:'English',telugu:'Telugu',hindi:'Hindi',
+series:'Series line (under the video)',seriesPh:'e.g. అభ్యుదయము · ప్రజాస్వామ్యము',template:'Design template',tplHint:'Click a design to choose it.',approved:'approved',example:'example',addTemplate:'+ Add template…',
+count:'How many shorts',countAuto:'As many good ones as found',length:'Length of each short',sec:'sec',min:'min',versions:'Versions to make',verEn:'English subtitles',verRu:'Russian subtitles',sendRu:'Send Russian subtitles for review',
+rgTitle:'Where to look for Shorts',rgAll:'The whole video',rgCustom:'Only these parts',from:'From',to:'To',rgAdd:'+ Add another part',rgFmt:'mm:ss or h:mm:ss',rgHint:'Handy for long personal videos: only the chosen parts are processed — faster and cheaper.',
+back:'Back',start:'Start',uploading:'Copying the video…',
+procTitle:'Working on your video',p_audio:'Preparing the sound',p_language:'Detecting the language',p_model:'Preparing speech recognition (first time: downloading the model)',p_asr:'Recognising speech',p_select:'Choosing fragments',p_subs:'Making subtitles and translation',p_render:'Making Shorts',
+closeNote:'You can close this window — the work continues in the background. Please keep the computer on. You will get a notification when it is ready.',
+frTitle:'Choose fragments',frHint:'Approve the fragments you like. You can move the start and the end.',why:'Why chosen',startL:'Start',endL:'End',approve:'Approve',reject:'Reject',rejected:'Rejected',approvedN:'Approved',next:'Next',
+txTitle:'Check the text',yellow:'Yellow = please check. If you leave it unchanged, it will be used as is.',orig:'Original',saved:'Saved',gloss:'Corrections are remembered and used automatically next time.',approveText:'Approve text',
+tiTitle:'Titles and design',titleEn:'Title (English)',titleRu:'Title (Russian)',accent:'Accent word — click to choose',make:'Make shorts',
+dnTitle:'Shorts are ready',openFolder:'Open folder',redo:'Change text',ready:'Ready',waitRu:'Waiting for review',ruSent:'Russian subtitles were sent for review by email. The Russian versions will be made automatically when the corrected file comes back.',
+ruNoMail:'E-mail is not set up in Settings, so the Russian subtitles were not sent. You can make the Russian versions now or import a corrected file.',makeRuNow:'Make Russian versions now',importRu:'Import corrected file…',
+uiLang:'Interface language',keys:'Services',dsKey:'DeepSeek key',saKey:'Sarvam key (backup recognition)',keySet:'saved — leave empty to keep',engine:'Speech recognition',engLocal:'Free, on this computer (recommended)',engSarvam:'Sarvam, online (backup)',
+mail:'Russian review by e-mail',sendRuHint:'Turn this off if the videos are not for a Russian audience.',smtpUser:'Your Gmail address (sender)',smtpPass:'Gmail app password',reviewer:'Reviewer’s e-mail',save:'Save',savedOk:'Saved',
+templates:'Design templates',tplAddHint:'A template is a .zip file with template.json and a logo.',updates:'Updates',autoUpd:'Install updates automatically',later:'Coming later',modHi:'Hindi subtitles',modTe:'Telugu subtitles',
+needKey:'Please enter the DeepSeek key in Settings first.',error:'Something went wrong:',retry:'Try again',stVideo:'Video',stFrag:'Fragments',stText:'Text',stTitles:'Titles',stShorts:'Shorts',empty:'No approved fragments.'},
+te:{home:'ప్రాజెక్టులు',settings:'సెట్టింగ్‌లు',newVideo:'కొత్త వీడియో',projects:'మీ ప్రాజెక్టులు',tagline:'ప్రవచనం నుండి సిద్ధమైన షార్ట్స్ వరకు — కొన్ని క్లిక్‌లలో.',noProjects:'ఇంకా ప్రాజెక్టులు లేవు. మీ మొదటి వీడియోను జోడించండి.',open:'తెరవండి',del:'తొలగించండి',
+st_processing:'పని జరుగుతోంది…',st_fragments:'మీ ఆమోదం కోసం వేచి ఉంది',st_text:'పాఠాన్ని తనిఖీ చేయండి',st_titles:'శీర్షికలు మరియు డిజైన్',st_rendering:'షార్ట్స్ తయారవుతున్నాయి…',st_done:'సిద్ధం',st_error:'ఆగిపోయింది',
+upTitle:'వీడియోను జోడించండి',drop:'వీడియోను ఇక్కడికి లాగండి',or:'లేదా',choose:'ఫైల్‌ను ఎంచుకోండి…',chosen:'ఎంచుకున్నది:',srcLang:'ప్రసంగ భాష',auto:'స్వయంచాలకంగా గుర్తించు',english:'ఇంగ్లీష్',telugu:'తెలుగు',hindi:'హిందీ',
+series:'సిరీస్ పంక్తి (వీడియో కింద)',seriesPh:'ఉదా. అభ్యుదయము · ప్రజాస్వామ్యము',template:'డిజైన్ టెంప్లేట్',tplHint:'డిజైన్‌ను ఎంచుకోవడానికి దానిపై క్లిక్ చేయండి.',approved:'ఆమోదించబడింది',example:'ఉదాహరణ',addTemplate:'+ టెంప్లేట్ జోడించండి…',
+count:'ఎన్ని షార్ట్స్',countAuto:'దొరికినన్ని మంచివి',length:'ప్రతి షార్ట్ నిడివి',sec:'సె.',min:'ని.',versions:'తయారు చేయవలసిన వెర్షన్లు',verEn:'ఇంగ్లీష్ ఉపశీర్షికలు',verRu:'రష్యన్ ఉపశీర్షికలు',sendRu:'రష్యన్ ఉపశీర్షికలను సమీక్షకు పంపండి',
+rgTitle:'షార్ట్స్ కోసం ఎక్కడ వెతకాలి',rgAll:'మొత్తం వీడియో',rgCustom:'ఈ భాగాలు మాత్రమే',from:'నుండి',to:'వరకు',rgAdd:'+ మరో భాగాన్ని జోడించండి',rgFmt:'నిమి:సె లేదా గం:నిమి:సె',rgHint:'పొడవైన వ్యక్తిగత వీడియోలకు ఉపయోగకరం: ఎంచుకున్న భాగాలు మాత్రమే ప్రాసెస్ చేయబడతాయి — వేగంగా, తక్కువ ఖర్చుతో.',
+back:'వెనక్కి',start:'ప్రారంభించండి',uploading:'వీడియో కాపీ అవుతోంది…',
+procTitle:'మీ వీడియోపై పని జరుగుతోంది',p_audio:'ధ్వనిని సిద్ధం చేస్తోంది',p_language:'భాషను గుర్తిస్తోంది',p_model:'ప్రసంగ గుర్తింపును సిద్ధం చేస్తోంది (మొదటిసారి: మోడల్ డౌన్‌లోడ్)',p_asr:'ప్రసంగాన్ని గుర్తిస్తోంది',p_select:'భాగాలను ఎంచుకుంటోంది',p_subs:'ఉపశీర్షికలు మరియు అనువాదం తయారవుతున్నాయి',p_render:'షార్ట్స్ తయారవుతున్నాయి',
+closeNote:'మీరు ఈ విండోను మూసివేయవచ్చు — పని నేపథ్యంలో కొనసాగుతుంది. దయచేసి కంప్యూటర్‌ను ఆన్‌లో ఉంచండి. సిద్ధమైనప్పుడు మీకు నోటిఫికేషన్ వస్తుంది.',
+frTitle:'భాగాలను ఎంచుకోండి',frHint:'మీకు నచ్చిన భాగాలను ఆమోదించండి. ప్రారంభం మరియు ముగింపును మార్చవచ్చు.',why:'ఎందుకు ఎంచుకున్నాం',startL:'ప్రారంభం',endL:'ముగింపు',approve:'ఆమోదించండి',reject:'తిరస్కరించండి',rejected:'తిరస్కరించబడింది',approvedN:'ఆమోదించబడినవి',next:'తదుపరి',
+txTitle:'పాఠాన్ని తనిఖీ చేయండి',yellow:'పసుపు = దయచేసి తనిఖీ చేయండి. మీరు మార్చకపోతే, అది అలాగే ఉపయోగించబడుతుంది.',orig:'మూలం',saved:'భద్రపరచబడింది',gloss:'సవరణలు గుర్తుంచుకోబడి, తర్వాత స్వయంచాలకంగా ఉపయోగించబడతాయి.',approveText:'పాఠాన్ని ఆమోదించండి',
+tiTitle:'శీర్షికలు మరియు డిజైన్',titleEn:'శీర్షిక (ఇంగ్లీష్)',titleRu:'శీర్షిక (రష్యన్)',accent:'ప్రాధాన్య పదం — ఎంచుకోవడానికి క్లిక్ చేయండి',make:'షార్ట్స్ తయారు చేయండి',
+dnTitle:'షార్ట్స్ సిద్ధంగా ఉన్నాయి',openFolder:'ఫోల్డర్ తెరవండి',redo:'పాఠాన్ని మార్చండి',ready:'సిద్ధం',waitRu:'సమీక్ష కోసం వేచి ఉంది',ruSent:'రష్యన్ ఉపశీర్షికలు ఇమెయిల్ ద్వారా సమీక్షకు పంపబడ్డాయి. సవరించిన ఫైల్ తిరిగి వచ్చినప్పుడు రష్యన్ వెర్షన్లు స్వయంచాలకంగా తయారవుతాయి.',
+ruNoMail:'సెట్టింగ్‌లలో ఇమెయిల్ సెట్ చేయలేదు, కాబట్టి రష్యన్ ఉపశీర్షికలు పంపబడలేదు. మీరు ఇప్పుడే రష్యన్ వెర్షన్లు తయారు చేయవచ్చు లేదా సవరించిన ఫైల్‌ను దిగుమతి చేయవచ్చు.',makeRuNow:'రష్యన్ వెర్షన్లు ఇప్పుడే తయారు చేయండి',importRu:'సవరించిన ఫైల్‌ను దిగుమతి చేయండి…',
+uiLang:'ఇంటర్‌ఫేస్ భాష',keys:'సేవలు',dsKey:'DeepSeek కీ',saKey:'Sarvam కీ (బ్యాకప్ గుర్తింపు)',keySet:'భద్రపరచబడింది — మార్చకపోతే ఖాళీగా ఉంచండి',engine:'ప్రసంగ గుర్తింపు',engLocal:'ఉచితం, ఈ కంప్యూటర్‌లో (సిఫార్సు)',engSarvam:'Sarvam, ఆన్‌లైన్ (బ్యాకప్)',
+mail:'ఇమెయిల్ ద్వారా రష్యన్ సమీక్ష',sendRuHint:'ఈ వీడియోలు రష్యన్ ప్రేక్షకుల కోసం కాకపోతే దీన్ని ఆపివేయండి.',smtpUser:'మీ Gmail చిరునామా (పంపేవారు)',smtpPass:'Gmail యాప్ పాస్‌వర్డ్',reviewer:'సమీక్షకుల ఇమెయిల్',save:'భద్రపరచండి',savedOk:'భద్రపరచబడింది',
+templates:'డిజైన్ టెంప్లేట్‌లు',tplAddHint:'టెంప్లేట్ అనేది template.json మరియు లోగోతో కూడిన .zip ఫైల్.',updates:'నవీకరణలు',autoUpd:'నవీకరణలను స్వయంచాలకంగా ఇన్‌స్టాల్ చేయండి',later:'త్వరలో',modHi:'హిందీ ఉపశీర్షికలు',modTe:'తెలుగు ఉపశీర్షికలు',
+needKey:'దయచేసి ముందుగా సెట్టింగ్‌లలో DeepSeek కీని నమోదు చేయండి.',error:'ఏదో తప్పు జరిగింది:',retry:'మళ్ళీ ప్రయత్నించండి',stVideo:'వీడియో',stFrag:'భాగాలు',stText:'పాఠం',stTitles:'శీర్షికలు',stShorts:'షార్ట్స్',empty:'ఆమోదించిన భాగాలు లేవు.'},
+ru:{home:'Проекты',settings:'Настройки',newVideo:'Новое видео',projects:'Ваши проекты',tagline:'От правачанама до готовых шортсов — в несколько щелчков.',noProjects:'Проектов пока нет. Добавьте первое видео.',open:'Открыть',del:'Удалить',
+st_processing:'Идёт работа…',st_fragments:'Ждёт вашего одобрения',st_text:'Проверьте текст',st_titles:'Заголовки и оформление',st_rendering:'Собираю шортсы…',st_done:'Готово',st_error:'Остановлено',
+upTitle:'Добавить видео',drop:'Перетащите видео сюда',or:'или',choose:'Выбрать файл…',chosen:'Выбрано:',srcLang:'Язык выступления',auto:'Определить автоматически',english:'Английский',telugu:'Телугу',hindi:'Хинди',
+series:'Строка серии (под видео)',seriesPh:'например, అభ్యుదయము · ప్రజాస్వామ్యము',template:'Шаблон дизайна',tplHint:'Щёлкните по дизайну, чтобы выбрать его.',approved:'утверждён',example:'пример',addTemplate:'+ Добавить шаблон…',
+count:'Сколько шортсов',countAuto:'Сколько найдётся хороших',length:'Длина шортса',sec:'с',min:'мин',versions:'Какие версии делать',verEn:'Английские субтитры',verRu:'Русские субтитры',sendRu:'Отправлять русские субтитры на проверку',
+rgTitle:'Где искать шортсы',rgAll:'Во всём видео',rgCustom:'Только в этих частях',from:'С',to:'По',rgAdd:'+ Добавить ещё часть',rgFmt:'мм:сс или ч:мм:сс',rgHint:'Удобно для длинных личных видео: обрабатываются только выбранные части — быстрее и дешевле.',
+back:'Назад',start:'Начать',uploading:'Копирую видео…',
+procTitle:'Обрабатываю видео',p_audio:'Готовлю звук',p_language:'Определяю язык',p_model:'Готовлю распознавание (в первый раз — скачиваю модель)',p_asr:'Распознаю речь',p_select:'Выбираю фрагменты',p_subs:'Делаю субтитры и перевод',p_render:'Собираю шортсы',
+closeNote:'Окно можно закрыть — работа продолжится в фоне. Не выключайте компьютер. Когда всё будет готово, появится уведомление.',
+frTitle:'Выбор фрагментов',frHint:'Одобрите понравившиеся фрагменты. Начало и конец можно сдвинуть.',why:'Почему выбран',startL:'Начало',endL:'Конец',approve:'Одобрить',reject:'Отклонить',rejected:'Отклонено',approvedN:'Одобрено',next:'Далее',
+txTitle:'Проверка текста',yellow:'Жёлтое = проверьте. Если ничего не менять, будет использовано как есть.',orig:'Оригинал',saved:'Сохранено',gloss:'Исправления запоминаются и учитываются автоматически в следующий раз.',approveText:'Одобрить текст',
+tiTitle:'Заголовки и оформление',titleEn:'Заголовок (английский)',titleRu:'Заголовок (русский)',accent:'Слово-акцент — щёлкните, чтобы выбрать',make:'Собрать шортсы',
+dnTitle:'Шортсы готовы',openFolder:'Открыть папку',redo:'Изменить текст',ready:'Готово',waitRu:'Ждёт проверки',ruSent:'Русские субтитры отправлены на проверку по почте. Русские версии соберутся автоматически, когда вернётся исправленный файл.',
+ruNoMail:'Почта не настроена, поэтому русские субтитры не отправлены. Можно собрать русские версии сейчас или загрузить исправленный файл.',makeRuNow:'Собрать русские версии сейчас',importRu:'Загрузить исправленный файл…',
+uiLang:'Язык интерфейса',keys:'Сервисы',dsKey:'Ключ DeepSeek',saKey:'Ключ Sarvam (запасное распознавание)',keySet:'сохранён — оставьте пустым, чтобы не менять',engine:'Распознавание речи',engLocal:'Бесплатное, на этом компьютере (рекомендуется)',engSarvam:'Sarvam, онлайн (запасной вариант)',
+mail:'Проверка русского текста по почте',sendRuHint:'Отключите, если видео не для русской аудитории.',smtpUser:'Ваш адрес Gmail (отправитель)',smtpPass:'Пароль приложения Gmail',reviewer:'Почта проверяющего',save:'Сохранить',savedOk:'Сохранено',
+templates:'Шаблоны дизайна',tplAddHint:'Шаблон — это .zip с файлом template.json и логотипом.',updates:'Обновления',autoUpd:'Ставить обновления автоматически',later:'Появится позже',modHi:'Субтитры на хинди',modTe:'Субтитры на телугу',
+needKey:'Сначала введите ключ DeepSeek в настройках.',error:'Что-то пошло не так:',retry:'Попробовать снова',stVideo:'Видео',stFrag:'Фрагменты',stText:'Текст',stTitles:'Заголовки',stShorts:'Шортсы',empty:'Нет одобренных фрагментов.'}};
+
+let S={lang:'en',screen:'home',state:null,proj:null,form:null,timer:null};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const t=k=>(T[S.lang]&&T[S.lang][k])||T.en[k]||k;
+const fmt=s=>{s=Math.max(0,Math.round(s));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')};
+const parseT=v=>{const p=String(v).trim().split(':').map(Number);if(p.some(isNaN)||!p.length)return null;return p.reduce((a,b)=>a*60+b,0)};
+async function api(u,body,raw){const r=await fetch(u,body===undefined?{}:{method:'POST',headers:raw?{}:{'Content-Type':'application/json'},body:raw?body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.error||r.status);return j}
+
+async function load(){S.state=await api('/api/state');S.lang=S.state.settings.ui_lang||'en';$('#ver').textContent='v'+S.state.version;render()}
+function go(sc){S.screen=sc;if(sc==='home'||sc==='settings'){S.proj=null;stopPoll()}render();window.scrollTo(0,0)}
+function setLang(l){S.lang=l;document.documentElement.lang=l;api('/api/settings',{ui_lang:l});render()}
+
+function nav(){
+  const L=[['en','EN','English'],['te','తెలుగు','తెలుగు'],['ru','RU','Русский']];
+  $('#nav').innerHTML=`<button class="n ${S.screen!=='settings'?'on':''}" onclick="go('home')">${t('home')}</button>
+  <button class="n ${S.screen==='settings'?'on':''}" onclick="go('settings')">${t('settings')}</button>
+  <span style="width:1px;height:28px;background:rgba(217,183,122,.45);margin:0 8px"></span>`+
+  L.map(([c,l])=>`<button class="lang ${S.lang===c?'on':''}" onclick="setLang('${c}')">${l}</button>`).join('');
+  const order={upload:0,processing:0,fragments:1,text:2,titles:3,rendering:4,done:4};
+  const cur=order[S.screen];const st=$('#steps');
+  if(cur===undefined){st.classList.add('hidden');return}
+  st.classList.remove('hidden');
+  st.innerHTML=[t('stVideo'),t('stFrag'),t('stText'),t('stTitles'),t('stShorts')].map((x,i)=>`<span class="step ${i===cur?'on':i<cur?'past':''}">${i+1}. ${x}</span>`).join('');
+}
+
+function render(){nav();const f={home:vHome,upload:vUpload,processing:vProc,rendering:vProc,fragments:vFrag,text:vText,titles:vTitles,done:vDone,settings:vSettings,error:vError}[S.screen]||vHome;$('#main').innerHTML=f()}
+
+// ---------------------------------------------------------------- home
+function vHome(){
+  const ps=S.state.projects;
+  return `<section class="hero"><img src="/ui/emblem.png" alt=""><span class="small" style="letter-spacing:.24em;color:#A9541F;font-weight:600">— PRAVACHANAM · SHORTS STUDIO —</span>
+  <span style="font:44px/1.3 Deva,serif;color:var(--brick)">स्वर्वाणीप्रकाशः</span>
+  <span style="font:italic 22px Fraunces,Telugu,serif;color:var(--mut)">${t('tagline')}</span></section>
+  <div class="row between" style="margin-bottom:20px"><h1>${t('projects')}</h1><button class="btn" onclick="newVideo()">+ ${t('newVideo')}</button></div>
+  <div class="stack">${ps.length?ps.map(p=>`<div class="card row between"><div><div style="font:600 19px Telugu,Deva,sans-serif">${esc(p.name)}</div>
+   <div class="mut small">${new Date(p.created*1000).toLocaleString()}</div></div>
+   <div class="row"><span class="badge ${p.status==='done'?'b-ok':p.status==='error'?'b-err':'b-wait'}">${t('st_'+p.status)}</span>
+   <button class="btn2" onclick="openProj('${p.id}')">${t('open')}</button><button class="btn3" onclick="delProj('${p.id}')" aria-label="${t('del')}">✕</button></div></div>`).join(''):`<p class="mut">${t('noProjects')}</p>`}</div>`;
+}
+async function delProj(id){if(!confirm(t('del')+'?'))return;await api('/api/project/'+id+'/delete',{});load()}
+function newVideo(){
+  if(!S.state.settings.has_deepseek_key){alert(t('needKey'));return go('settings')}
+  S.form={path:'',lang:'auto',series:'',template:S.state.settings.default_template||'jnana-prakasha',en:true,ru:true,review:S.state.settings.send_ru_review,count:'',length:'35-120',rg:'all',ranges:[['','']]};go('upload')}
+
+// ---------------------------------------------------------------- upload
+function tplGallery(sel,onpick){
+  return `<div class="row" style="align-items:stretch">${S.state.templates.map(x=>{const c=x.colors||{};return `<button class="tpl ${x.id===sel?'on':''}" onclick="${onpick}('${x.id}')">
+  <div class="mini9" style="background:${c.bg};border:1px solid ${c.line}"><span style="font-size:5px;letter-spacing:.2em;color:${c.accent}">— PRAVACHANAM —</span>
+  <div class="row" style="gap:5px;flex-wrap:nowrap;width:100%"><img src="${x.logo}" alt="" style="width:20px;height:20px;border-radius:50%">
+  <span style="font:600 9px/1.1 Fraunces,serif;color:${c.ink};text-align:left">Who Is a True <em style="color:${c.accent}">King</em></span></div>
+  <div class="v" style="border:1px solid ${c.line}"></div><span style="font:7.5px/1.2 Corm,serif;color:${c.ink}">The one who delights the people is the king.</span>
+  <span style="margin-top:auto;font-size:4.5px;letter-spacing:.18em;color:${c.accent}">— ${esc(x.brand)} —</span></div>
+  <b>${esc(x.name)}</b><span class="small mut">${x.status==='approved'?t('approved'):x.status==='example'?t('example'):''}</span></button>`}).join('')}
+  <button class="tadd" onclick="$('#tplfile').click()">+<br>${t('addTemplate')}</button><input type="file" id="tplfile" accept=".zip" class="hidden" onchange="addTpl(this)"></div>`;
+}
+async function addTpl(inp){const f=inp.files[0];if(!f)return;const j=await api('/api/template_add',await f.arrayBuffer(),true);S.state.templates=j.templates;render()}
+function vUpload(){
+  const F=S.form;
+  return `<h1>${t('upTitle')}</h1>
+  <div class="drop" id="drop" ondragover="event.preventDefault();this.classList.add('hover')" ondragleave="this.classList.remove('hover')" ondrop="dropFile(event)">
+   <span style="font-size:20px;font-weight:500">${t('drop')}</span><span class="mut">${t('or')}</span>
+   <button class="btn2" onclick="chooseFile()">${t('choose')}</button>
+   ${F.path?`<span>${t('chosen')} <b>${esc(F.path.split(/[\\/]/).pop())}</b></span>`:''}<span id="upmsg" class="mut"></span></div>
+  <div class="grid" style="margin-top:24px">
+   <label class="f">${t('srcLang')}<select onchange="S.form.lang=this.value">${[['auto','auto'],['te','telugu'],['en','english'],['hi','hindi']].map(([v,k])=>`<option value="${v}" ${F.lang===v?'selected':''}>${t(k)}</option>`).join('')}</select></label>
+   <label class="f">${t('series')}<input type="text" value="${esc(F.series)}" placeholder="${esc(t('seriesPh'))}" oninput="S.form.series=this.value" style="font-family:Telugu,Deva,sans-serif"></label>
+   <label class="f">${t('count')}<select onchange="S.form.count=this.value">${[['',t('countAuto')],['3','3'],['5','5'],['8','8']].map(([v,l])=>`<option value="${v}" ${F.count===v?'selected':''}>${l}</option>`).join('')}</select></label>
+   <label class="f">${t('length')}<select onchange="S.form.length=this.value">${[['30-60','30–60 '+t('sec')],['35-120','35 '+t('sec')+' – 2 '+t('min')],['60-180','1–3 '+t('min')]].map(([v,l])=>`<option value="${v}" ${F.length===v?'selected':''}>${l}</option>`).join('')}</select></label>
+  </div>
+  <section style="margin-top:24px" class="stack"><h2 style="font-size:18px">${t('template')}</h2><span class="mut small">${t('tplHint')}</span>${tplGallery(F.template,'pickTplForm')}</section>
+  <div class="card stack" style="margin-top:24px"><b>${t('rgTitle')}</b>
+   <label class="chk"><input type="radio" name="rg" ${F.rg==='all'?'checked':''} onchange="S.form.rg='all';render()">${t('rgAll')}</label>
+   <label class="chk"><input type="radio" name="rg" ${F.rg==='custom'?'checked':''} onchange="S.form.rg='custom';render()">${t('rgCustom')}</label>
+   ${F.rg==='custom'?`<div class="stack" style="margin-left:30px">${F.ranges.map((r,i)=>`<div class="row"><b style="color:var(--brick)">${i+1}.</b>
+     <label class="row">${t('from')}<input type="text" style="width:120px;min-height:44px;border:1px solid var(--line);border-radius:8px;padding:0 10px" placeholder="${t('rgFmt')}" value="${esc(r[0])}" oninput="S.form.ranges[${i}][0]=this.value"></label>
+     <label class="row">${t('to')}<input type="text" style="width:120px;min-height:44px;border:1px solid var(--line);border-radius:8px;padding:0 10px" placeholder="${t('rgFmt')}" value="${esc(r[1])}" oninput="S.form.ranges[${i}][1]=this.value"></label>
+     <button class="mini" style="width:44px;height:44px" onclick="S.form.ranges.length>1&&S.form.ranges.splice(${i},1);render()">✕</button></div>`).join('')}
+     <button class="btn2" style="align-self:flex-start" onclick="S.form.ranges.push(['','']);render()">${t('rgAdd')}</button><span class="mut small">${t('rgHint')}</span></div>`:''}</div>
+  <div class="card stack" style="margin-top:24px"><b>${t('versions')}</b>
+   <label class="chk"><input type="checkbox" ${F.en?'checked':''} onchange="S.form.en=this.checked">${t('verEn')}</label>
+   <label class="chk"><input type="checkbox" ${F.ru?'checked':''} onchange="S.form.ru=this.checked;render()">${t('verRu')}</label>
+   ${F.ru?`<label class="chk" style="margin-left:30px"><input type="checkbox" ${F.review?'checked':''} onchange="S.form.review=this.checked">${t('sendRu')}</label>`:''}</div>
+  <div class="row between" style="margin-top:28px"><button class="btn3" onclick="go('home')">${t('back')}</button><button class="btn" ${F.path?'':'disabled'} onclick="startProj()">${t('start')}</button></div>`;
+}
+function pickTplForm(id){S.form.template=id;render()}
+async function chooseFile(){const j=await api('/api/choose_file',{});if(j.path){S.form.path=j.path;render()}}
+async function dropFile(e){e.preventDefault();const f=e.dataTransfer.files[0];if(!f)return;$('#upmsg').textContent=t('uploading');
+  const j=await api('/api/upload?name='+encodeURIComponent(f.name),f,true);S.form.path=j.path;render()}
+async function startProj(){
+  const F=S.form;let ranges=null;
+  if(F.rg==='custom'){ranges=F.ranges.map(r=>[parseT(r[0]),parseT(r[1])]).filter(r=>r[0]!==null&&r[1]!==null&&r[1]>r[0]);if(!ranges.length)ranges=null}
+  const [lo,hi]=F.length.split('-').map(Number);
+  try{const p=await api('/api/project',{path:F.path,opts:{lang:F.lang,series:F.series,template:F.template,versions:{en:F.en,ru:F.ru},ru_review:F.review,count:F.count?Number(F.count):null,length:[lo,hi],ranges}});
+   openProj(p.id)}catch(e){alert(t('error')+' '+e.message)}}
+
+// ---------------------------------------------------------------- project polling
+async function openProj(id){S.proj=await api('/api/project/'+id);route();poll()}
+function route(){const st=S.proj.status;S.screen={processing:'processing',rendering:'rendering',fragments:'fragments',text:'text',done:'done',error:'error',titles:'titles'}[st]||'home';render()}
+function stopPoll(){if(S.timer)clearInterval(S.timer);S.timer=null}
+function poll(){stopPoll();S.timer=setInterval(async()=>{if(!S.proj)return stopPoll();const busy=['processing','rendering'].includes(S.proj.status)||(S.proj.ru_sent&&!S.proj.ru_done);if(!busy)return;
+  const p=await api('/api/project/'+S.proj.id);const changed=p.status!==S.proj.status||(p.progress||{}).frac!==(S.proj.progress||{}).frac||p.ru_done!==S.proj.ru_done;S.proj=p;if(changed)route()},2000)}
+function vProc(){const pr=S.proj.progress||{};const step=t('p_'+pr.step);
+  return `<h1>${S.screen==='rendering'?t('p_render'):t('procTitle')}</h1><div class="card stack"><div class="bar"><div style="width:${Math.round((pr.frac||0)*100)}%"></div></div>
+  <span style="font-weight:600">${step!=='p_'+pr.step?step:''}…</span></div>
+  <div class="note row" style="margin-top:20px;font-size:17px">ⓘ ${t('closeNote')}</div>`}
+function vError(){return `<h1>${esc(S.proj.name)}</h1><div class="err">${t('error')} ${esc(S.proj.error)}</div>
+  <div class="row" style="margin-top:20px"><button class="btn3" onclick="go('home')">${t('back')}</button>
+  ${S.proj.fragments&&S.proj.fragments.length?`<button class="btn2" onclick="setStatus('fragments')">${t('frTitle')}</button>`:''}</div>`}
+async function setStatus(s){S.proj=await api('/api/project/'+S.proj.id+'/status',{status:s});route()}
+
+// ---------------------------------------------------------------- fragments
+function vFrag(){const P=S.proj,L=S.lang==='ru'?'ru':'en';const n=P.fragments.filter(f=>f.status==='ok').length;
+  return `<h1>${t('frTitle')}</h1><p class="mut" style="margin:0 0 20px;font-size:17px">${t('frHint')}</p><div class="stack">${P.fragments.map((f,i)=>`
+  <article class="card frag ${f.status||''}"><video controls preload="none" src="/api/project/${P.id}/preview/${f.id}?v=${f.start}-${f.end}"></video>
+  <div class="stack" style="flex:999 1 420px;min-width:0;gap:10px"><div class="row between"><h2>${i+1}. ${esc(f['title_'+L]||f.title_en)}</h2>
+  ${f.status?`<span class="badge ${f.status==='ok'?'b-ok':'b-no'}">${f.status==='ok'?t('approve')+' ✓':t('rejected')}</span>`:''}</div>
+  <span class="mut small">${t('why')}: ${esc(f.why)} · ${fmt(f.start)}–${fmt(f.end)} (${Math.round(f.end-f.start)} ${t('sec')})</span>
+  <p style="margin:0">${esc(f['summary_'+L]||f.summary_en)}</p>
+  <div class="row" style="gap:20px">${['start','end'].map(k=>`<div class="row" style="gap:6px"><span class="small mut" style="min-width:64px">${t(k+'L')}</span>
+   ${[-5,-1].map(d=>`<button class="mini" onclick="shift(${f.id},'${k}',${d})">${d}</button>`).join('')}<b style="min-width:48px;text-align:center">${fmt(f[k])}</b>
+   ${[1,5].map(d=>`<button class="mini" onclick="shift(${f.id},'${k}',${d})">+${d}</button>`).join('')}</div>`).join('')}</div>
+  <div class="row"><button class="okb" onclick="fr(${f.id},'ok')">✓ ${t('approve')}</button><button class="btn3" onclick="fr(${f.id},'no')">✕ ${t('reject')}</button></div></div></article>`).join('')}</div>
+  <div class="row between" style="margin-top:28px"><button class="btn3" onclick="go('home')">${t('back')}</button><span class="mut">${t('approvedN')}: ${n}</span>
+  <button class="btn" ${n?'':'disabled'} onclick="toTexts()">${t('next')} →</button></div>`}
+async function fr(fid,a){S.proj=await api('/api/project/'+S.proj.id+'/fragment',{fid,action:a});render()}
+async function shift(fid,field,delta){S.proj=await api('/api/project/'+S.proj.id+'/fragment',{fid,action:'shift',field,delta});render()}
+async function toTexts(){await api('/api/project/'+S.proj.id+'/texts',{});S.proj.status='processing';S.proj.progress={step:'subs',frac:0};route();poll()}
+
+// ---------------------------------------------------------------- text check
+function vText(){const P=S.proj;const langs=['en','ru'].filter(l=>P.versions[l]);const frs=P.fragments.filter(f=>f.status==='ok');
+  return `<h1>${t('txTitle')}</h1><div class="yel" style="margin-bottom:20px">${t('yellow')}</div><div class="stack">${frs.map((f,n)=>`
+  <section class="card"><h2 style="margin-bottom:10px">${n+1}. ${esc(f['title_'+(S.lang==='ru'?'ru':'en')]||f.title_en)}</h2>
+  <table class="subt"><tr><td class="t"></td><td class="o mut small">${t('orig')}</td>${langs.map(l=>`<td class="mut small">${l==='en'?t('verEn'):t('verRu')}</td>`).join('')}</tr>
+  ${f.subs.map((s,i)=>`<tr class="${s.flag?'flag':''}"><td class="t">${fmt(s.start)}</td><td class="o">${esc(s.orig)}${s.flag?`<div class="flagr">⚠ ${esc(s.flag)}</div>`:''}</td>
+  ${langs.map(l=>`<td><textarea onchange="saveSub(${f.id},${i},'${l}',this)">${esc(s[l])}</textarea></td>`).join('')}</tr>`).join('')}</table></section>`).join('')||`<p>${t('empty')}</p>`}</div>
+  <p class="mut small">${t('gloss')}</p>
+  <div class="row between" style="margin-top:20px"><button class="btn3" onclick="setStatus('fragments')">${t('back')}</button><button class="btn" onclick="setStatus('titles')">✓ ${t('approveText')}</button></div>`}
+async function saveSub(fid,idx,lang,el){await api('/api/project/'+S.proj.id+'/sub',{fid,idx,lang,text:el.value});const f=S.proj.fragments.find(x=>x.id===fid);f.subs[idx][lang]=el.value;f.subs[idx].flag='';el.style.borderColor='var(--ok)'}
+
+// ---------------------------------------------------------------- titles
+function words(title,acc){const a=(acc||'').toLowerCase();let found=false;return (title||'').split(/\s+/).filter(Boolean).map(w=>{const on=!found&&a&&w.replace(/[.,!?:;«»"']/g,'').toLowerCase()===a;found=found||on;return{w,on}})}
+function vTitles(){const P=S.proj;const langs=['en','ru'].filter(l=>P.versions[l]);const frs=P.fragments.filter(f=>f.status==='ok');
+  return `<h1>${t('tiTitle')}</h1><section class="stack" style="margin:16px 0 28px"><b>${t('template')}</b>${tplGallery(P.template,'pickTplProj')}</section>
+  <div class="stack">${frs.map((f,n)=>`<section class="card stack"><h2>${n+1}.</h2>${langs.map(l=>`
+   <label class="f">${l==='en'?t('titleEn'):t('titleRu')}<input type="text" value="${esc(f['title_'+l])}" onchange="setField(${f.id},'title_${l}',this.value)"></label>
+   <div class="stack" style="gap:6px"><span class="small mut">${t('accent')}</span><div class="row" style="gap:8px">${words(f['title_'+l],f['accent_'+l]).map(x=>
+   `<button class="chip ${x.on?'on':''}" onclick="setField(${f.id},'accent_${l}','${esc(x.w.replace(/[.,!?:;«»"']/g,''))}')">${esc(x.w)}</button>`).join('')}</div></div>`).join('')}</section>`).join('')}</div>
+  <div class="row between" style="margin-top:28px"><button class="btn3" onclick="setStatus('text')">${t('back')}</button><button class="btn" onclick="makeShorts()">${t('make')}</button></div>`}
+async function setField(fid,k,v){S.proj=await api('/api/project/'+S.proj.id+'/fields',{fid,[k]:v});render()}
+async function pickTplProj(id){S.proj=await api('/api/project/'+S.proj.id+'/fields',{template:id});render()}
+async function makeShorts(){await api('/api/project/'+S.proj.id+'/render',{});S.proj.status='rendering';S.proj.progress={step:'render',frac:0};route();poll()}
+
+// ---------------------------------------------------------------- done
+function vDone(){const P=S.proj;const ruWait=P.versions.ru&&P.ru_review&&!P.ru_done;
+  return `<div class="row between" style="margin-bottom:20px"><h1>${t('dnTitle')}</h1><button class="btn" onclick="openFolder()">${t('openFolder')}</button></div>
+  ${ruWait?(P.ru_sent?`<div class="note" style="margin-bottom:16px">✉ ${t('ruSent')}</div>`:`<div class="note stack" style="margin-bottom:16px">${t('ruNoMail')}
+   <div class="row"><button class="btn2" onclick="ruNow()">${t('makeRuNow')}</button><button class="btn2" onclick="$('#rufile').click()">${t('importRu')}</button></div></div>`):''}
+  <input type="file" id="rufile" accept=".txt" class="hidden" onchange="ruImport(this)">
+  <div class="stack">${(P.outputs||[]).map(o=>`<div class="card row between"><span>▶ ${esc(o.name)}</span>
+   <span class="row"><span class="badge b-ok">${t('ready')}</span><a class="btn2" style="text-decoration:none" target="_blank" href="/media?path=${encodeURIComponent(o.file)}">▶</a></span></div>`).join('')}
+   ${ruWait?P.fragments.filter(f=>f.status==='ok').map((f,i)=>`<div class="card row between"><span>${String(i+1).padStart(2,'0')}_…_RU.mp4</span><span class="badge b-wait">${t('waitRu')}</span></div>`).join(''):''}</div>
+  <div class="row" style="margin-top:28px"><button class="btn3" onclick="go('home')">${t('home')}</button><button class="btn3" onclick="setStatus('text')">${t('redo')}</button>
+  ${ruWait&&P.ru_sent?`<button class="btn3" onclick="$('#rufile').click()">${t('importRu')}</button>`:''}</div>`}
+function openFolder(){const o=(S.proj.outputs||[])[0];api('/api/open_folder',{path:o?o.file.replace(/[\\/][^\\/]+$/,''):''})}
+async function ruImport(inp){const f=inp.files[0];if(!f)return;await api('/api/project/'+S.proj.id+'/ru_import',{text:await f.text()});S.proj.status='rendering';route();poll()}
+async function ruNow(){await api('/api/project/'+S.proj.id+'/ru_import',{text:''});S.proj.status='rendering';route();poll()}
+
+// ---------------------------------------------------------------- settings
+function vSettings(){const s=S.state.settings;const L=[['en','English'],['te','తెలుగు'],['ru','Русский']];
+  const inp=(k,lab,type,secret)=>`<label class="f">${lab}<input type="${type}" id="s_${k}" value="${secret?'':esc(s[k]||'')}" placeholder="${secret&&s['has_'+k]?esc(t('keySet')):''}" autocomplete="off"></label>`;
+  return `<h1>${t('settings')}</h1><div class="stack">
+  <section class="card stack"><h2>${t('uiLang')}</h2><div class="row">${L.map(([c,l])=>`<button class="chip ${S.lang===c?'on':''}" style="font-style:normal" onclick="setLang('${c}')">${l}</button>`).join('')}</div></section>
+  <section class="card stack"><h2>${t('keys')}</h2>${inp('deepseek_key',t('dsKey'),'password',1)}
+   <b>${t('engine')}</b><label class="chk"><input type="radio" name="eng" value="local" ${s.asr_engine!=='sarvam'?'checked':''}>${t('engLocal')}</label>
+   <label class="chk"><input type="radio" name="eng" value="sarvam" ${s.asr_engine==='sarvam'?'checked':''}>${t('engSarvam')}</label>${inp('sarvam_key',t('saKey'),'password',1)}</section>
+  <section class="card stack"><h2>${t('mail')}</h2><label class="chk"><input type="checkbox" id="s_send_ru_review" ${s.send_ru_review?'checked':''}>${t('sendRu')}</label>
+   <span class="mut">${t('sendRuHint')}</span>${inp('reviewer_email',t('reviewer'),'email')}${inp('smtp_user',t('smtpUser'),'email')}${inp('smtp_password',t('smtpPass'),'password',1)}</section>
+  <section class="card stack"><h2>${t('templates')}</h2>${tplGallery(s.default_template||'jnana-prakasha','pickTplDefault')}<span class="mut small">${t('tplAddHint')}</span></section>
+  <section class="card stack"><h2>${t('updates')}</h2><label class="chk"><input type="checkbox" id="s_auto_update" ${s.auto_update?'checked':''}>${t('autoUpd')}</label>
+   <span class="mut small">v${S.state.version}</span><b>${t('later')}</b><span class="mut">• ${t('modHi')}<br>• ${t('modTe')}</span></section>
+  <div class="row"><button class="btn" onclick="saveSettings()">${t('save')}</button><span id="savemsg" class="mut"></span></div></div>`}
+async function pickTplDefault(id){const j=await api('/api/settings',{default_template:id});S.state.settings=j.settings;render()}
+async function saveSettings(){const b={};for(const k of ['deepseek_key','sarvam_key','reviewer_email','smtp_user','smtp_password']){const v=$('#s_'+k).value.trim();if(v||!k.match(/key|password/))b[k]=v}
+  b.send_ru_review=$('#s_send_ru_review').checked;b.auto_update=$('#s_auto_update').checked;b.asr_engine=(document.querySelector('input[name=eng]:checked')||{}).value||'local';
+  const j=await api('/api/settings',b);S.state.settings=j.settings;render();$('#savemsg').textContent='✓ '+t('savedOk')}
+
+load();
+</script>
+</body>
+</html>
