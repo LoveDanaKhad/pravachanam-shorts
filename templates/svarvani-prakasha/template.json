@@ -1,0 +1,31 @@
+{
+  "id": "svarvani-prakasha",
+  "name": "Svarvāṇī Prakāśaḥ",
+  "status": "example",
+  "colors": {
+    "bg": "#F6F1E2",
+    "ink": "#1E3A24",
+    "accent": "#8C6420",
+    "line": "#CDBF95",
+    "muted": "#3F5A44",
+    "gold": "#B48A3C",
+    "glow": "#1E5A2E"
+  },
+  "label": "PRAVACHANAM",
+  "logo": "logo.png",
+  "who": "DR. USHA RANI SANKA",
+  "brand": "SVARVĀṆĪ PRAKĀŚAḤ",
+  "video": {"x": 70, "y": 420, "size": 940},
+  "subtitle_zone": [1392, 1642],
+  "fonts": {
+    "title_en": "PS Fraunces",
+    "title_en_italic": "PS Fraunces Italic",
+    "title_ru": "PS Cormorant",
+    "title_ru_italic": "PS Cormorant Italic",
+    "subtitle": "PS Cormorant",
+    "label": "PS Inter SemiBold",
+    "who": "PS Inter Medium",
+    "series_te": "PS Telugu",
+    "series_hi": "PS Devanagari"
+  }
+}

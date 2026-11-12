@@ -1,0 +1,31 @@
+{
+  "id": "jnana-prakasha",
+  "name": "Jñāna Prakāśa",
+  "status": "approved",
+  "colors": {
+    "bg": "#F9F6F0",
+    "ink": "#281E15",
+    "accent": "#B64D20",
+    "line": "#D7CDC1",
+    "muted": "#514134",
+    "gold": "#D9B77A",
+    "glow": "#B64D20"
+  },
+  "label": "PRAVACHANAM",
+  "logo": "logo.png",
+  "who": "SWAMI PRAKASANANDENDRA SARASWATI",
+  "brand": "JÑĀNA PRAKĀŚA",
+  "video": {"x": 70, "y": 420, "size": 940},
+  "subtitle_zone": [1392, 1642],
+  "fonts": {
+    "title_en": "PS Fraunces",
+    "title_en_italic": "PS Fraunces Italic",
+    "title_ru": "PS Cormorant",
+    "title_ru_italic": "PS Cormorant Italic",
+    "subtitle": "PS Cormorant",
+    "label": "PS Inter SemiBold",
+    "who": "PS Inter Medium",
+    "series_te": "PS Telugu",
+    "series_hi": "PS Devanagari"
+  }
+}

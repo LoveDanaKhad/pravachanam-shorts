@@ -1,0 +1,4 @@
+onnx-asr[cpu]>=0.12
+numpy
+Pillow>=10
+fonttools
